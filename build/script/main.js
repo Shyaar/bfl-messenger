@@ -84,37 +84,37 @@ function getFriend(id) {
         console.log(users[receiverIndex].messages)
         JSON.stringify(localStorage.setItem("users", users))
 
-        function updateDisplay(){
-            JSON.parse(localStorage.getItem("users"))
-            let sentMessage =  users[senderIndex].messages.sent
-            let receivedMessage = users[receiverIndex].messages.received
+        // function updateDisplay(){
+        //     JSON.parse(localStorage.getItem("users"))
+        //     let sentMessage =  users[senderIndex].messages.sent
+        //     let receivedMessage = users[receiverIndex].messages.received
 
-            sentMessage.forEach((message)=>{
-                let textStyle = document.getElementById("bubbles");
-                let sent = document.createElement("div");
-                sent.className =
-                  "p-2 text-[12px] lg:text-[18px] md:ml-[200px] lg:ml-[400px]";
-                sent.innerHTML = `<div class="bg-purple-800 rounded-xl p-3 text-white">
-                                <p>${sentMessage.text}</p>
-                            </div>
-                            <div id="bBtom" class="flex items-center mt-1 mx-3">
-                                <p id="timeStamp" class="text-[10px] lg:text-[15px] w-full">${message.date}</p>
-                                <i class="fa-solid fa-check" style="color: #000000;"></i>
-                            </div>`;
+        //     sentMessage.forEach((message)=>{
+        //         let textStyle = document.getElementById("bubbles");
+        //         let sent = document.createElement("div");
+        //         sent.className =
+        //           "p-2 text-[12px] lg:text-[18px] md:ml-[200px] lg:ml-[400px]";
+        //         sent.innerHTML = `<div class="bg-purple-800 rounded-xl p-3 text-white">
+        //                         <p>${sentMessage.text}</p>
+        //                     </div>
+        //                     <div id="bBtom" class="flex items-center mt-1 mx-3">
+        //                         <p id="timeStamp" class="text-[10px] lg:text-[15px] w-full">${message.date}</p>
+        //                         <i class="fa-solid fa-check" style="color: #000000;"></i>
+        //                     </div>`;
         
-                let received = document.createElement("div");
-                received.className = `p-2 text-[12px] lg:text-[18px] md:mr-[200px] lg:mr-[400px]`;
-                received.innerHTML = `<p>${message.text}</p>
-                            </div>
-                            <div id="bBtom" class="flex items-center mt-1 mx-3">
-                                <p id="timeStamp" class="text-[10px] lg:text-[15px] w-full">${message.date}</p>
-                                <i class="fa-solid fa-check" style="color: #000000;"></i>
-                            </div>`;
+        //         let received = document.createElement("div");
+        //         received.className = `p-2 text-[12px] lg:text-[18px] md:mr-[200px] lg:mr-[400px]`;
+        //         received.innerHTML = `<p>${message.text}</p>
+        //                     </div>
+        //                     <div id="bBtom" class="flex items-center mt-1 mx-3">
+        //                         <p id="timeStamp" class="text-[10px] lg:text-[15px] w-full">${message.date}</p>
+        //                         <i class="fa-solid fa-check" style="color: #000000;"></i>
+        //                     </div>`;
         
-                // textStyle.insertAdjacentElement("beforeend",)
-            })
+        //         // textStyle.insertAdjacentElement("beforeend",)
+        //     })
 
-            }
+        //     }
 
         }
       }

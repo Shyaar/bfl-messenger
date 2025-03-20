@@ -1,6 +1,6 @@
 let signUp = document.getElementById("signUp");
 
-users = JSON.parse(localStorage.getItem("users")) || [];
+let users = JSON.parse(localStorage.getItem("users")) || [];
 
 //clear Error
 function clearErr(id) {
@@ -64,7 +64,7 @@ signUp.addEventListener("click", () => {
         isLoggedIn:false,
         messages:{
           sent:[
-            
+
           ],
           received:[
 
