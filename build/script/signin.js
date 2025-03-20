@@ -35,11 +35,9 @@ signIn.addEventListener("click", () => {
   if (user) {
     if (user.password !== password.value) {
       alert("Incorrect password!!! 🙅‍♂️🔐 Please check your Password");
+      return
     }
-    console.log(user)
     users[userIndex].isLoggedIn=true
-    console.log(users[userIndex])
-    console.log(users)
     
     localStorage.setItem("currentUser",JSON.stringify(user))
     localStorage.setItem("users",JSON.stringify(users))

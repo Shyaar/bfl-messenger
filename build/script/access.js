@@ -26,8 +26,8 @@ signUp.addEventListener("click", () => {
   let lastName = document.getElementById("lsName").value;
   let email = document.getElementById("mail").value;
   let password = document.getElementById("pass").value;
-  let fullname = `${firstName}${lastName}`;
-  console.log(firstName, lastName, email, password, fullname);
+  let username = `${firstName}${lastName}`;
+  console.log(firstName, lastName, email, password, username);
 
   //validating input
   if (firstName == "") {
@@ -55,11 +55,21 @@ signUp.addEventListener("click", () => {
       let id = genId();
 
       let uData = {
-        username: fullname,
-        email: email,
-        password: password,
-        id: id,
-        isLoggedIn:false
+        firstName,
+        lastName,
+        username,
+        email,
+        password,
+        id,
+        isLoggedIn:false,
+        messages:{
+          sent:[
+            
+          ],
+          received:[
+
+          ]
+        }
       };
       console.log(uData);
       console.log(users);
@@ -76,7 +86,10 @@ signUp.addEventListener("click", () => {
       alert(
         `User Already Exist with username(${user.email}). Log in instead!!`
       );
-      window.location.href = "login.html";
+      return;
     }
+    window.location.href = "login.html";
   }
 });
+
+
