@@ -1,13 +1,18 @@
 let currentUser = JSON.parse(localStorage.getItem("currentUser"));
 let users = JSON.parse(localStorage.getItem("users"));
 
-
-
 let status = currentUser.isLoggedIn;
 let cuFn = currentUser.firstName;
 let cuLn = currentUser.lastName;
 let friends = users.filter((user) => user.id != currentUser.id);
 console.log(currentUser.isLoggedIn == true);
+
+function updateDisplay() {
+  JSON.parse(localStorage.getItem("users"));
+  let sentMessage = users[senderIndex].messages.sent;
+  let receivedMessage = users[receiverIndex].messages.received;
+  console.log(sentMessage, receivedMessage);
+}
 
 if (status == false) {
   window.location.href = login.html;
@@ -40,32 +45,26 @@ function getFriend(id) {
   messageArea.insertAdjacentElement("afterbegin", chatHead);
 
   //   getting messages
-  let openuser = friends.find((friend) => friend.id == currentFriend.id);
+  let openUser = friends.find((friend) => friend.id == currentFriend.id);
 
-  if (openuser) {
-    console.log(openuser.messages);
+  if (openUser) {
+    console.log(openUser);
     document.getElementById("chat").style.display = "block";
     let sendbtn = document.getElementById("sendbtn");
 
     sendbtn.addEventListener("click", () => {
       let text = document.getElementById("text").value;
+
       if (currentUser.isLoggedIn == true) {
         let sender = users.find((user) => currentUser.id == user.id);
         let senderIndex = users.indexOf(sender);
-        console.log(senderIndex)
-        let receiver = users.find((user) => openuser.id == user.id);
+
+        let receiver = users.find((user) => openUser.id == user.id);
         let receiverIndex = users.indexOf(receiver);
-        console.log(receiverIndex)
-
-        console.log(users[senderIndex],users[receiverIndex])
-
 
         let senderName = sender.firstName;
-        console.log(senderName);
 
         let receiverName = receiver.firstName;
-        console.log(receiverName);
-
 
         let message = {
           senderName,
@@ -73,54 +72,54 @@ function getFriend(id) {
           text,
           date: Date(),
         };
-        console.log(users[senderIndex],users[receiverIndex])
-        
-        console.log(users[senderIndex].messages);
-        console.log(users[receiverIndex].messages);
 
         users[senderIndex].messages.sent.push(message);
         users[receiverIndex].messages.received.push(message);
-        console.log(users[senderIndex].messages)
-        console.log(users[receiverIndex].messages)
-        JSON.stringify(localStorage.setItem("users", users))
 
-        // function updateDisplay(){
-        //     JSON.parse(localStorage.getItem("users"))
-        //     let sentMessage =  users[senderIndex].messages.sent
-        //     let receivedMessage = users[receiverIndex].messages.received
+        localStorage.setItem("users", JSON.stringify(users));
 
-        //     sentMessage.forEach((message)=>{
-        //         let textStyle = document.getElementById("bubbles");
-        //         let sent = document.createElement("div");
-        //         sent.className =
-        //           "p-2 text-[12px] lg:text-[18px] md:ml-[200px] lg:ml-[400px]";
-        //         sent.innerHTML = `<div class="bg-purple-800 rounded-xl p-3 text-white">
-        //                         <p>${sentMessage.text}</p>
-        //                     </div>
-        //                     <div id="bBtom" class="flex items-center mt-1 mx-3">
-        //                         <p id="timeStamp" class="text-[10px] lg:text-[15px] w-full">${message.date}</p>
-        //                         <i class="fa-solid fa-check" style="color: #000000;"></i>
-        //                     </div>`;
-        
-        //         let received = document.createElement("div");
-        //         received.className = `p-2 text-[12px] lg:text-[18px] md:mr-[200px] lg:mr-[400px]`;
-        //         received.innerHTML = `<p>${message.text}</p>
-        //                     </div>
-        //                     <div id="bBtom" class="flex items-center mt-1 mx-3">
-        //                         <p id="timeStamp" class="text-[10px] lg:text-[15px] w-full">${message.date}</p>
-        //                         <i class="fa-solid fa-check" style="color: #000000;"></i>
-        //                     </div>`;
-        
-        //         // textStyle.insertAdjacentElement("beforeend",)
-        //     })
+        users[senderIndex].messages.sent.forEach((message) => {
+          if (message) {
+            let textStyle = document.getElementById("bubbles");
+            let sent = document.createElement("div");
+            sent.id = "sent";
+            sent.className =
+              "p-2 text-[12px] lg:text-[18px] md:ml-[200px] lg:ml-[400px]";
+            sent.innerHTML = `
+                    <div class="bg-purple-800 rounded-xl p-3 text-white">
+                        <p>${message.text}</p>
+                    </div>
+                    <div id="bBtom" class="flex items-center mt-1 mx-3">
+                                <p id="timeStamp" class="text-[10px] lg:text-[15px] w-full">${message.date}</p>
+                                <i class="fa-solid fa-check" style="color: #000000;"></i>
+                            </div>`;
+            textStyle.insertAdjacentElement("beforeend", sent);
+          }
+        });
 
-        //     }
-
-        }
+        currentUser.messages.received.forEach((message) => {
+          if (message) {
+            console.log(currentUser.messages)
+            let textStyle = document.getElementById("bubbles");
+            let received = document.createElement("div");
+            received.id = "received";
+            received.className = `p-2 text-[12px] lg:text-[18px] md:mr-[200px] lg:mr-[400px]`;
+            received.innerHTML = `
+            <div class="bg-white rounded-xl p-3 text-white">
+                <p>${message.text}</p>
+            </div>
+            <div id="bBtom" class="flex items-center mt-1 mx-3">
+                        <p id="timeStamp" class="text-[10px] lg:text-[15px] w-full">${message.date}</p>
+                        <i class="fa-solid fa-check" style="color: #000000;"></i>
+                    </div>`;
+            textStyle.insertAdjacentElement("beforeend", received);
+          }
+        });
       }
-    );
+    });
   }
 }
+
 
 let myFriends = friends.forEach((friend) => {
   let friendCard = document.createElement("div");
