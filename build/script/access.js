@@ -26,7 +26,7 @@ signUp.addEventListener("click", () => {
   let lastName = document.getElementById("lsName").value;
   let email = document.getElementById("mail").value;
   let password = document.getElementById("pass").value;
-  let username = `${firstName}${lastName}`;
+  let username = document.getElementById("userName").value;
   console.log(firstName, lastName, email, password, username);
 
   //validating input
@@ -35,6 +35,9 @@ signUp.addEventListener("click", () => {
   }
   if (lastName == "") {
     document.getElementById("lnError").style.display = "block";
+  }
+  if (username == "") {
+    document.getElementById("user-nameError").style.display = "block";
   }
   if (email == "") {
     document.getElementById("eError").style.display = "block";
@@ -48,7 +51,7 @@ signUp.addEventListener("click", () => {
   if (password == "") {
     document.getElementById("passError").style.display = "block";
   } else {
-    const user = users.find((user) => user.email == email);
+    const user = users.find((user) => user.username == username);
 
     if (!user) {
       console.log("mol");
@@ -62,14 +65,9 @@ signUp.addEventListener("click", () => {
         password,
         id,
         isLoggedIn:false,
-        messages:{
-          sent:[
-
-          ],
-          received:[
-
-          ]
-        }
+        messages:[
+          
+        ]
       };
       console.log(uData);
       console.log(users);
@@ -84,7 +82,7 @@ signUp.addEventListener("click", () => {
     } else {
       console.log("found");
       alert(
-        `User Already Exist with username(${user.email}). Log in instead!!`
+        `User Already Exist with username(${user.username}). try ${user.username+1} or Log in instead!!`
       );
       return;
     }

@@ -76,6 +76,13 @@
                     <input type="text" name="last name" id="lsName" class="p-2 border rounded-xl"
                         onkeydown="clearErr('lnError')">
                 </div>
+                <div id="user-name" class="flex flex-col">
+                    <label for="last name" class="text-[10px] md:text-[15px] lg:text-[20px]">User name</label>
+                    <p id="user-nameError" class="hidden text-red-300 text-[10px] md:text-[15px] lg:text-[20px]">This field is
+                        Required!!!</p>
+                    <input type="text" name="user name" id="userName" class="p-2 border rounded-xl"
+                        onkeydown="clearErr('user-nameError')">
+                </div>
                 <div id="email" class="flex flex-col">
                     <label for="email" class="text-[10px] md:text-[15px] lg:text-[20px]">Email Address</label>
                     <p id="eError" class=" hidden text-red-300 text-[10px] md:text-[15px] lg:text-[20px]">This field is
